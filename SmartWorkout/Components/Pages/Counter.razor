@@ -9,6 +9,7 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@code {
-   
-}
+<Alert Visible="@visible">
+    I can be closed!111
+    <CloseButton Clicked="@OnClicked" />
+</Alert>
