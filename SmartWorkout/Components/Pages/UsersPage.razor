@@ -1,0 +1,32 @@
+﻿@using SmartWorkout.Entities
+@page "/UsersPage"
+<h3>Users page</h3>
+
+
+
+
+
+<DataGrid 
+	TItem="User" 
+	Data="@UsersList" 
+	Filterable 
+	@* FilterMethod="DataGridFilterMethod.StartsWith"  *@
+	Responsive>
+    <ChildContent>
+		<DataGridColumn TItem="User" Field="FirstName" Caption="First Name" Sortable="false" Displayable="true" />
+		<DataGridColumn TItem="User" Field="LastName" Caption="Last Name" Sortable="false" Displayable="true" />
+		<DataGridColumn TItem="User" Field="Birthday" Caption="Birthday" Sortable="false" Displayable="true" />
+		<DataGridColumn TItem="User" Field="Gender" Caption="Gender" Sortable="false" Displayable="true" />
+    </ChildContent>
+</DataGrid>
+
+
+
+
+
+@* <ul>
+   <li>
+			<span>@user.FirstName @user.LastName</span>
+			<span>@user.Birthday.ToString() + @user.Gender</span>
+   </li>
+</ul> *@

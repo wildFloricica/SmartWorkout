@@ -1,7 +1,11 @@
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using Microsoft.EntityFrameworkCore;
 using SmartWorkout.Components;
+using SmartWorkout.Context;
+using SmartWorkout.Repositories.Implementations;
+using SmartWorkout.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,10 @@ builder.Services
     })
     .AddBootstrapProviders()
     .AddFontAwesomeIcons();
+
+builder.Services.AddDbContext<SmartWorkoutContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
