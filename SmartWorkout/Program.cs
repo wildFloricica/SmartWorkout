@@ -24,6 +24,9 @@ builder.Services
 builder.Services.AddDbContext<SmartWorkoutContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
+builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+builder.Services.AddScoped<IExerciseLogRepository, ExerciseLogRepository>();
 
 var app = builder.Build();
 

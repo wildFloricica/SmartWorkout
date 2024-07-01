@@ -5,5 +5,6 @@ namespace SmartWorkout.Repositories.Interfaces
     public interface IUserRepository
     {
         ICollection<User> GetUsers();
+        void AddUser (User user);
     }
 }

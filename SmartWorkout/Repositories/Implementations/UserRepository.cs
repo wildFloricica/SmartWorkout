@@ -18,5 +18,11 @@ namespace SmartWorkout.Repositories.Implementations
             var users = _context.Users.ToList();
             return users;
         }
+
+        public void AddUser(User user)
+        {
+            _context.Users.Add(user);
+            _context.SaveChanges();
+        }
     }
 }
