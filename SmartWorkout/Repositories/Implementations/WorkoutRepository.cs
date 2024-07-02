@@ -16,7 +16,12 @@ namespace SmartWorkout.Repositories.Implementations
 
         public ICollection<Workout> GetWorkouts()
         {
-            return _context.Workouts.Include(x=>x.User).ToList();
+            return _context.Workouts.Include(x => x.User).ToList();
+        }
+        public void AddWorkout(Workout workout)
+        {
+            _context.Workouts.Add(workout);
+            _context.SaveChanges();
         }
     }
 }

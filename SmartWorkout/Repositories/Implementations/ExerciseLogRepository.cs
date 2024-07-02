@@ -16,7 +16,12 @@ namespace SmartWorkout.Repositories.Implementations
 
         public ICollection<ExerciseLog> GetExerciseLogs()
         {
-            return _context.ExerciseLogs.Include(x=>x.Exercise).Include(x=>x.Workout).ToList();
+            return _context.ExerciseLogs.Include(x => x.Exercise).Include(x => x.Workout).ToList();
+        }
+        public void AddExerciseLog(ExerciseLog exerciseLog)
+        {
+            _context.ExerciseLogs.Add(exerciseLog);
+            _context.SaveChanges();
         }
     }
 }

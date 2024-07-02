@@ -1,0 +1,34 @@
+﻿@using SmartWorkout.Entities
+@page "/add-edit-workout"
+
+<h3>AddOrEdit Workout</h3>
+
+
+
+<EditForm Model="@Workout" OnValidSubmit=@SaveWorkout FormName="editForm">
+	<div class="form-group">
+		<label>UserId :</label>
+		<div>
+			<InputNumber @bind-Value="Workout.UserId" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => Workout.UserId)" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Name :</label>
+		<div>
+			<InputText @bind-Value="Workout.Name" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => Workout.Name)" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Date :</label>
+		<div>
+			<InputDate @bind-Value="Workout.Date" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => Workout.Date)" />
+		</div>
+	</div>
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" value="Save" />
+	</div>
+</EditForm>
+

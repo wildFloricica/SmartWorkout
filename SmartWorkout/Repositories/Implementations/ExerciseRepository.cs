@@ -17,5 +17,11 @@ namespace SmartWorkout.Repositories.Implementations
         {
             return _context.Exercises.ToList();
         }
+        public void AddExercise(Exercise exercise)
+        {
+            _context.Add(exercise);
+            _context.SaveChanges();
+        }
+
     }
 }

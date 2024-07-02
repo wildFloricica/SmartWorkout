@@ -5,7 +5,7 @@ using SmartWorkout.Repositories.Interfaces;
 
 namespace SmartWorkout.Components.Pages
 {
-    public partial class AddOrEdit : ComponentBase
+    public partial class AddEditUser : ComponentBase
     {
 
         [Inject]

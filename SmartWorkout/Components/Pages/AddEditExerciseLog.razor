@@ -1,0 +1,43 @@
+﻿@using SmartWorkout.Entities
+@page "/add-edit-exercise-log"
+
+<h3>AddOrEdit ExerciseLog</h3>
+
+
+
+<EditForm Model="@ExerciseLog" OnValidSubmit=@SaveExerciseLog FormName="editForm">
+	<div class="form-group">
+		<label>WorkoutId :</label>
+		<div>
+			<InputNumber @bind-Value="ExerciseLog.WorkoutId" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => ExerciseLog.WorkoutId)" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label>ExerciseId :</label>
+		<div>
+			<InputNumber @bind-Value="ExerciseLog.ExerciseId" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => ExerciseLog.ExerciseId)" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label>Reps :</label>
+		<div>
+			<InputNumber @bind-Value="ExerciseLog.Reps" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => ExerciseLog.Reps)" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label>Duration :</label>
+		<div>
+			<InputNumber @bind-Value="ExerciseLog.Duration" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => ExerciseLog.Duration)" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" value="Save" />
+	</div>
+</EditForm>
+
