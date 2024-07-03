@@ -26,7 +26,7 @@ namespace SmartWorkout.Components.Pages
             User.Birthday = userDto.Birthday;
             User.Gender = userDto.Gender;
             userRepository.AddUser(User);
-            await InvokeAsync(() => Navigation.NavigateTo("/UsersPage"));
+            await InvokeAsync(() => Navigation.NavigateTo("/users"));
         }
     }
 

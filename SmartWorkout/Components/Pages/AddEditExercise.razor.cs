@@ -22,7 +22,7 @@ namespace SmartWorkout.Components.Pages
             Exercise.Description = exerciseDto.Description;
             Exercise.Type = exerciseDto.Type;
             exerciseRepository.AddExercise(Exercise);
-            await InvokeAsync(() => Navigation.NavigateTo("/exercises-page"));
+            await InvokeAsync(() => Navigation.NavigateTo("/exercises"));
         }
     }
 

@@ -25,7 +25,7 @@ namespace SmartWorkout.Components.Pages
             ExerciseLog.Reps = exerciseLogDto.Reps;
             ExerciseLog.Duration = exerciseLogDto.Duration;
             exerciseLogRepository.AddExerciseLog(ExerciseLog);
-            await InvokeAsync(() => Navigation.NavigateTo("/exercise-logs-page"));
+            await InvokeAsync(() => Navigation.NavigateTo("/exercise-logs"));
 
         }
     }

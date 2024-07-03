@@ -24,7 +24,7 @@ namespace SmartWorkout.Components.Pages
             Workout.Date = workoutDto.Date;
             Workout.Name = workoutDto.Name;
             workoutRepository.AddWorkout(Workout);
-            await InvokeAsync(() => Navigation.NavigateTo("/workouts-page"));
+            await InvokeAsync(() => Navigation.NavigateTo("/workouts"));
         }
     }
 
