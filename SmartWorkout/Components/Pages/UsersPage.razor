@@ -1,23 +1,31 @@
 ﻿@using SmartWorkout.Entities
 @page "/users"
+@rendermode InteractiveServer
+
+
 <h3>Users page</h3>
 
 
 
 
 
-<DataGrid
-	TItem="User" 
-	Data="@UsersList" 
-	Filterable 
-	@* FilterMethod="DataGridFilterMethod.StartsWith"  *@
-	Responsive>
-    <ChildContent>
+<DataGrid TItem="User"
+		  Data="@UsersList"
+		  Responsive
+			Editable>
+	<DataGridColumns>
 		<DataGridColumn TItem="User" Field="FirstName" Caption="First Name" Sortable="false" Displayable="true" />
 		<DataGridColumn TItem="User" Field="LastName" Caption="Last Name" Sortable="false" Displayable="true" />
 		<DataGridColumn TItem="User" Field="Birthday" Caption="Birthday" Sortable="false" Displayable="true" />
 		<DataGridColumn TItem="User" Field="Gender" Caption="Gender" Sortable="false" Displayable="true" />
-    </ChildContent>
+
+		<DataGridCommandColumn TItem="User" Caption="Action" NewCommandAllowed="false">
+			<EditCommandTemplate>
+				<Button Color="Color.Primary" Clicked="() => EditUser(context)">Edit</Button>
+			</EditCommandTemplate>
+		</DataGridCommandColumn>
+	</DataGridColumns>
+
 </DataGrid>
 
 <a href="/user/add">add or edit user</a>

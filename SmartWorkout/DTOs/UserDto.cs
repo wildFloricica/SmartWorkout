@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SmartWorkout.Entities;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 
 namespace SmartWorkout.DTOs
@@ -13,6 +14,17 @@ namespace SmartWorkout.DTOs
         public DateTime Birthday { get; set; }
         [Required(ErrorMessage = "Please supply gender")]
         public string Gender { get; set; }
+
+        public bool Exist { get; set; } = true;
+
+        public static UserDto FromEntity(User user)
+        {
+            return new UserDto
+            {
+                //Birthday
+                 //= .a.sd;.asdjl
+            };
+        }
 
     }
 }

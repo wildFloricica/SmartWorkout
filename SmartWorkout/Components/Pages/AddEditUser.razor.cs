@@ -15,8 +15,19 @@ namespace SmartWorkout.Components.Pages
         [Inject]
         private NavigationManager Navigation { get; set; }
 
+        [Parameter]
+		public int? UserId { get; set; }
 
-        [SupplyParameterFromForm]
+
+		protected override void OnParametersSet()
+		{
+			if(UserId != null)
+            {
+                userDto = userRepository.GetById(UserId);
+            }
+		}
+
+		[SupplyParameterFromForm]
         public UserDto userDto { get; set; } = new UserDto();
         public User User { get; set; } = new User();
         public async Task SaveUser()
@@ -25,7 +36,17 @@ namespace SmartWorkout.Components.Pages
             User.LastName = userDto.LastName;
             User.Birthday = userDto.Birthday;
             User.Gender = userDto.Gender;
-            userRepository.AddUser(User);
+            if (UserId == null)
+            {
+                userRepository.AddUser(User); 
+            }
+            else
+            {
+
+                // GET USER BY ID DIN BAZA
+                User.Id = (int)UserId;
+                userRepository.EditUser(User);
+            }
             await InvokeAsync(() => Navigation.NavigateTo("/users"));
         }
     }
