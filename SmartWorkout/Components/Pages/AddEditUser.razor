@@ -19,11 +19,14 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label>Gender :</label>
-		<div>
-			<InputText @bind-Value="userDto.Gender" class="form-control col-sm-3" />
-			<ValidationMessage For="(() => userDto.Gender)" />
-		</div>
+		<label> Select your gender: </label>
+		<InputSelect @bind-Value="userDto.Gender">
+			@foreach (var gender in Enum.GetValues(typeof(Gender)))
+			{
+				<option value="@gender">@gender</option>
+			}
+		</InputSelect>
+		<ValidationMessage For="@(() => userDto.Gender)" />
 	</div>
 	<div class="form-group">
 		<label>Birthday :</label>
