@@ -25,10 +25,20 @@ namespace SmartWorkout.Components.Pages
 
             if(context != null && context.Item != null)
             {
-
 				Navigation.NavigateTo($"/user/edit/{id}");
             }
         }
+        private void DeleteUser(DeleteCommandContext<User> context)
+        {
+            var id = context.Item.Id;
+
+            if(context != null && context.Item != null)
+            {
+                userRepository.DeleteUser(id);
+                Navigation.Refresh(forceReload: true);
+
+			}
+		}
 
 
 	}

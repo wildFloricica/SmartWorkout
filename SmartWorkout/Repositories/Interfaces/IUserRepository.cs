@@ -9,5 +9,8 @@ namespace SmartWorkout.Repositories.Interfaces
         void AddUser (UserDto userDto);
 		UserDto GetById(int? id);
         public void EditUser(UserDto userDto);
-	}
+	    
+        public void DeleteUser(int? id);
+    }
+
 }

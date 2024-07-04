@@ -1,4 +1,5 @@
-﻿using SmartWorkout.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using SmartWorkout.Context;
 using SmartWorkout.DTOs;
 using SmartWorkout.Entities;
 using SmartWorkout.Repositories.Interfaces;
@@ -58,6 +59,10 @@ namespace SmartWorkout.Repositories.Implementations
 				user.Gender = userDto.Gender;
 				_context.SaveChanges();
 			}
+		}
+		public void DeleteUser(int? id)
+		{
+			if(id != null) _context.Users.Where(u => u.Id == id).ExecuteDelete();
 		}
 	}
 }
