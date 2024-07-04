@@ -1,10 +1,10 @@
 ﻿@using SmartWorkout.Entities
 @page "/user/add"
 @page "/user/edit/{UserId:int}"
+@rendermode InteractiveServer
 <h3>AddOrEdit User</h3>
 
-@if (userDto.Exist)
-{
+@* @if (userDto.Exist) *@
 	
 <EditForm Model="@userDto" OnValidSubmit=@SaveUser FormName="editForm">
 	<DataAnnotationsValidator />
@@ -45,7 +45,6 @@
 	</div>
 </EditForm>
 
-}
-else {
+@* else {
 	<h1> hopa no user like this</h1>
-}
+} *@

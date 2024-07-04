@@ -6,6 +6,7 @@ namespace SmartWorkout.DTOs
 {
     public class UserDto
     {
+        public int?  Id { get; set; }
         [Required(ErrorMessage = "Please supply first name")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Please supply last name")]
@@ -22,7 +23,10 @@ namespace SmartWorkout.DTOs
             return new UserDto
             {
                 //Birthday
-                 //= .a.sd;.asdjl
+                Birthday = user.Birthday,
+                Gender = user.Gender,
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
 

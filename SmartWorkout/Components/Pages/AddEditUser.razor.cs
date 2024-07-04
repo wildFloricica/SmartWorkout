@@ -32,20 +32,14 @@ namespace SmartWorkout.Components.Pages
         public User User { get; set; } = new User();
         public async Task SaveUser()
         {
-            User.FirstName = userDto.FirstName;
-            User.LastName = userDto.LastName;
-            User.Birthday = userDto.Birthday;
-            User.Gender = userDto.Gender;
             if (UserId == null)
             {
-                userRepository.AddUser(User); 
+                userRepository.AddUser(userDto); 
             }
             else
             {
-
-                // GET USER BY ID DIN BAZA
-                User.Id = (int)UserId;
-                userRepository.EditUser(User);
+                userDto.Id = UserId;
+                userRepository.EditUser(userDto);
             }
             await InvokeAsync(() => Navigation.NavigateTo("/users"));
         }
