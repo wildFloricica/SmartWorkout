@@ -1,1 +1,5 @@
-﻿nu mergea workouts pt ca stersesem din useri si deci se stersesera si workouturile lor
+﻿1. nu mergea workouts pt ca stersesem din useri
+si deci se stersesera si workouturile lor
+
+2. filterable strica tabelu
++ trebuia neparat sa pui sortable

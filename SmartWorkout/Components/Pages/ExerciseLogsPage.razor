@@ -7,8 +7,7 @@
 
 <DataGrid  TItem="ExerciseLog"
           Data="@exerciseLogs"
-          Filterable
-          FilterMethod="DataGridFilterMethod.StartsWith"
+          Sortable
           Responsive>
     <DataGridColumn TItem="ExerciseLog" Field="Reps" Caption="Reps"></DataGridColumn>
     <DataGridColumn TItem="ExerciseLog" Field="Duration" Caption="Duration"></DataGridColumn>

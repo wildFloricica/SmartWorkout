@@ -1,5 +1,6 @@
 ﻿@using SmartWorkout.Entities
 @page "/exercises"
+@rendermode InteractiveServer
 <h3>Exercise Page</h3>
 
 
@@ -8,14 +9,24 @@
 
 <DataGrid 
 	TItem="Exercise" 
-	Data="@exercises" 
-	Filterable 
-	@* FilterMethod="DataGridFilterMethod.StartsWith"  *@
-	Responsive>
-    <ChildContent>
+	Data="@ExercisesList" 
+	Sortable
+	Responsive
+	Editable>
+    <DataGridColumns>
 		<DataGridColumn TItem="Exercise" Field="Description" Caption="Description" Sortable="false" Displayable="true" />
 		<DataGridColumn TItem="Exercise" Field="Type" Caption="Type" Sortable="false" Displayable="true" />
-    </ChildContent>
+
+		<DataGridCommandColumn TItem="Exercise" Caption="Action" NewCommandAllowed="false">
+			<EditCommandTemplate>
+				<Button Color="Color.Primary" Clicked="() => EditExercise(context)">Edit</Button>
+			</EditCommandTemplate>
+			<DeleteCommandTemplate>
+				<Button Color="Color.Secondary" Clicked="() => DeleteExercise(context)">Deletee</Button>
+			</DeleteCommandTemplate>
+		</DataGridCommandColumn>
+	</DataGridColumns>
+	
 </DataGrid>
 
 
