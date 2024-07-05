@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazorise.DataGrid;
+using Microsoft.AspNetCore.Components;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SmartWorkout.Entities;
 using SmartWorkout.Repositories.Implementations;
 using SmartWorkout.Repositories.Interfaces;
@@ -10,9 +12,10 @@ namespace SmartWorkout.Components.Pages
     {
         [Inject]
         public IWorkoutRepository workoutRepository { get; set; }
+		[Inject]
+		private NavigationManager Navigation { get; set; }
 
-        
-        public ICollection<Workout> workouts { get; set; }
+		public ICollection<Workout> workouts { get; set; }
         protected override void OnInitialized()
         {
           workouts =  workoutRepository.GetWorkouts();
@@ -22,5 +25,14 @@ namespace SmartWorkout.Components.Pages
             //}
         }
 
+        public void GoToExercises(EditCommandContext<Workout> context   )
+        {
+			var id = context.Item.Id;
+
+			if (context != null && context.Item != null)
+			{
+				Navigation.NavigateTo($"/exercises/{id}");
+			}
+		}
     }
 }

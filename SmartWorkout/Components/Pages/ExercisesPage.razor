@@ -1,5 +1,6 @@
 ﻿@using SmartWorkout.Entities
 @page "/exercises"
+@page  "/exercises/{WorkoutId:int?}"
 @rendermode InteractiveServer
 <h3>Exercise Page</h3>
 
@@ -20,6 +21,11 @@
 		<DataGridCommandColumn TItem="Exercise" Caption="Action" NewCommandAllowed="false">
 			<EditCommandTemplate>
 				<Button Color="Color.Primary" Clicked="() => EditExercise(context)">Edit</Button>
+				@if (WorkoutId != null)
+				{
+					<Button Color="Color.Primary" Clicked="() => CreateExerciseLog(context)">CreateExerciseLog</Button>
+
+				}
 			</EditCommandTemplate>
 			<DeleteCommandTemplate>
 				<Button Color="Color.Secondary" Clicked="() => DeleteExercise(context)">Deletee</Button>

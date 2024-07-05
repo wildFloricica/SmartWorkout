@@ -15,6 +15,8 @@ namespace SmartWorkout.Components.Pages
 		[Inject]
 		private NavigationManager Navigation { get; set; }
 		public ICollection<Exercise> ExercisesList { get; set; }
+		[Parameter]
+		public int? WorkoutId {  get; set; }
 		protected override void OnInitialized()
 		{
 			ExercisesList = exerciseRepository.GetExercises();
@@ -40,5 +42,14 @@ namespace SmartWorkout.Components.Pages
 			}
 		}
 
+		public void CreateExerciseLog(EditCommandContext<Exercise> context)
+		{
+			var id = context.Item.Id;
+
+			if (context != null && context.Item != null)
+			{
+				Navigation.NavigateTo($"/exercise-log/add/{WorkoutId}/{id}");
+			}
+		}
 	}
 }
