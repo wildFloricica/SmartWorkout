@@ -39,7 +39,16 @@ namespace SmartWorkout.Components.Pages
 
 			}
 		}
+        private void AddWorkout(EditCommandContext<User> context)
+        {
+            var id = context.Item.Id;
 
+			if (context != null && context.Item != null)
+			{
+				Navigation.NavigateTo($"/workout/add/{id}");
+			}
+			
+        }
 
 	}
 }

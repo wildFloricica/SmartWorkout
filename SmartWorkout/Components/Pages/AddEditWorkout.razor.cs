@@ -11,19 +11,22 @@ namespace SmartWorkout.Components.Pages
     public partial class AddEditWorkout : ComponentBase
     {
 
+        [Parameter]
+        public int UserId { get; set; }
         [Inject]
         public IWorkoutRepository workoutRepository { get; set; }
         [Inject]
         private NavigationManager Navigation { get; set; }
 
-        [SupplyParameterFromForm]
+		protected override void OnParametersSet()
+		{
+            workoutDto.UserId = UserId;
+		}
+		[SupplyParameterFromForm]
         public WorkoutDto workoutDto { get; set; } = new WorkoutDto();
         public Workout Workout { get; set; } = new Workout();
         public async Task SaveWorkout() { 
-            Workout.UserId = workoutDto.UserId;
-            Workout.Date = workoutDto.Date;
-            Workout.Name = workoutDto.Name;
-            workoutRepository.AddWorkout(Workout);
+            workoutRepository.AddWorkout(workoutDto);
             await InvokeAsync(() => Navigation.NavigateTo("/workouts"));
         }
     }

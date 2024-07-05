@@ -22,6 +22,8 @@
 		<DataGridCommandColumn TItem="User" Caption="Action" NewCommandAllowed="false">
 			<EditCommandTemplate>
 				<Button Color="Color.Primary" Clicked="() => EditUser(context)">Edit</Button>
+				<Button Color="Color.Primary" Clicked="() => AddWorkout(context)">Edit</Button>
+
 			</EditCommandTemplate>
 			<DeleteCommandTemplate >
 				<Button Color="Color.Secondary" Clicked="() => DeleteUser(context)">Deletee</Button>

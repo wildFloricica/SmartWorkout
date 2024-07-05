@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartWorkout.Context;
+using SmartWorkout.DTOs;
 using SmartWorkout.Entities;
 using SmartWorkout.Repositories.Interfaces;
 
@@ -18,9 +19,15 @@ namespace SmartWorkout.Repositories.Implementations
         {
             return _context.Workouts.Include(x => x.User).ToList();
         }
-        public void AddWorkout(Workout workout)
+        public void AddWorkout(WorkoutDto workoutDto)
         {
-            _context.Workouts.Add(workout);
+            _context.Workouts.Add(new Workout()
+            {
+                Date = workoutDto.Date,
+                Name = workoutDto.Name,
+                UserId = workoutDto.UserId,
+                
+            });
             _context.SaveChanges();
         }
     }

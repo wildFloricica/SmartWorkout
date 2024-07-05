@@ -3,3 +3,5 @@ si deci se stersesera si workouturile lor
 
 2. filterable strica tabelu
 + trebuia neparat sa pui sortable
+
+3. nup, trebuia doar sa nui pui filterable aia era tot
