@@ -19,7 +19,7 @@
 		<DataGridColumn TItem="User" Field="Birthday" Caption="Birthday" Sortable="false" Displayable="true" />
 		<DataGridColumn TItem="User" Field="Gender" Caption="Gender" Sortable="false" Displayable="true" />
 
-		<DataGridCommandColumn TItem="User" Caption="Action" NewCommandAllowed="false">
+		<DataGridCommandColumn TItem="User" Caption="Action">
 			<EditCommandTemplate>
 				<Button Color="Color.Primary" Clicked="() => EditUser(context)">Edit</Button>
 				<Button Color="Color.Primary" Clicked="() => AddWorkout(context)">AddWorkout</Button>
@@ -28,6 +28,10 @@
 			<DeleteCommandTemplate >
 				<Button Color="Color.Secondary" Clicked="() => DeleteUser(context)">Deletee</Button>
 			</DeleteCommandTemplate>
+
+			<NewCommandTemplate>
+				<Button Color="Color.Secondary" Clicked="() => AddUser()">+ Add User</Button>
+			</NewCommandTemplate>
 		</DataGridCommandColumn>
 	</DataGridColumns>
 

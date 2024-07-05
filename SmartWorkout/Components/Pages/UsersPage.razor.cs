@@ -49,6 +49,14 @@ namespace SmartWorkout.Components.Pages
 			}
 			
         }
+		private void AddUser()
+		{
+
+		    Navigation.NavigateTo($"/user/add");
+		}
+
+
+
 
 	}
 }
