@@ -7,6 +7,5 @@ namespace SmartWorkout.Repositories.Interfaces
     {
         ICollection<Workout> GetWorkouts();
         void AddWorkout(WorkoutDto workoutDto);
-        
     }
 }

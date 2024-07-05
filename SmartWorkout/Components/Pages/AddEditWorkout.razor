@@ -2,11 +2,14 @@
 @page "/workout/add/{UserId:int}"
 <h3>AddOrEdit Workout</h3>
 
+<div>@userDto.FirstName</div>
 
 
 <EditForm Model="@workoutDto" OnValidSubmit=@SaveWorkout FormName="editForm">
 	<DataAnnotationsValidator />
-	<div class="form-group">
+
+
+	<div class="form-group" hidden="true">
 		<label>UserId :</label>
 		<div>
 			<InputNumber @bind-Value="workoutDto.UserId" class="form-control col-sm-3" />
