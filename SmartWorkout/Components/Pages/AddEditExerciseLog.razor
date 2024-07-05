@@ -1,12 +1,15 @@
 ﻿@using SmartWorkout.Entities
 @page "/exercise-log/add"
 @page "/exercise-log/add/{WorkoutId:int?}/{ExerciseId:int?}"
+@page "/exercise-log/edit/{ExerciseLogId:int?}"
+@rendermode InteractiveServer
 <h3>AddOrEdit ExerciseLog</h3>
 
 
 
 <EditForm Model="@exerciseLogDto" OnValidSubmit=@SaveExerciseLog FormName="editForm">
 	<DataAnnotationsValidator />
+	<InputNumber @bind-Value="exerciseLogDto.Id" hidden/>
 	<div class="form-group">
 		<label>WorkoutId :</label>
 		<div>

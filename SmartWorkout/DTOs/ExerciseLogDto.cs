@@ -5,6 +5,7 @@ namespace SmartWorkout.DTOs
 {
     public class ExerciseLogDto
     {
+        public int Id { get; set; } 
         [Required(ErrorMessage = "Please supply reps")]
         public int Reps { get; set; }
 

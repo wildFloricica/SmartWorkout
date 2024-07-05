@@ -21,16 +21,22 @@ namespace SmartWorkout.Components.Pages
 		public ExerciseLog ExerciseLog { get; set; } = new ExerciseLog();
 		public async Task SaveExerciseLog()
 		{
-			ExerciseLog.WorkoutId = exerciseLogDto.WorkoutId;
-			ExerciseLog.ExerciseId = exerciseLogDto.ExerciseId;
-			ExerciseLog.Reps = exerciseLogDto.Reps;
-			ExerciseLog.Duration = exerciseLogDto.Duration;
-			exerciseLogRepository.AddExerciseLog(ExerciseLog);
 
-			if (!WorkoutId.HasValue)
-				await InvokeAsync(() => Navigation.NavigateTo("/exercise-logs"));
-			else
+
+			if (WorkoutId.HasValue && ExerciseId.HasValue)
+			{
+				// create
+				exerciseLogRepository.AddExerciseLog(exerciseLogDto);
 				await InvokeAsync(() => Navigation.NavigateTo($"/exercises/{WorkoutId}"));
+			}
+			else if(ExerciseLogId.HasValue)
+			{
+				// edit
+				exerciseLogRepository.Edit(exerciseLogDto);
+				await InvokeAsync(() => Navigation.NavigateTo($"/exercise-logs"));
+			}
+		
+
 
 		}
 
@@ -38,7 +44,8 @@ namespace SmartWorkout.Components.Pages
 		public int? WorkoutId { get; set; }
 		[Parameter]
 		public int? ExerciseId { get; set; }
-
+		[Parameter]
+		public int? ExerciseLogId { get; set; }
 		protected override void OnParametersSet()
 		{
 			if (WorkoutId.HasValue)
@@ -48,6 +55,11 @@ namespace SmartWorkout.Components.Pages
 			if (ExerciseId.HasValue)
 			{
 				exerciseLogDto.ExerciseId = (int)ExerciseId;
+			}
+			if(ExerciseLogId.HasValue)
+			{
+				exerciseLogDto.Id = (int)ExerciseLogId;
+				exerciseLogDto = exerciseLogRepository.GetById((int)ExerciseLogId);
 			}
 		}
 	}

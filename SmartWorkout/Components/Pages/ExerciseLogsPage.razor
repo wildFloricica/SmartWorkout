@@ -1,5 +1,7 @@
 ﻿@using SmartWorkout.Entities
 @page "/exercise-logs"
+@rendermode InteractiveServer
+
 <h3>ExerciseLogs Page</h3>
 
 
@@ -8,13 +10,18 @@
 <DataGrid  TItem="ExerciseLog"
           Data="@exerciseLogs"
           Sortable
-          Responsive>
+          Responsive Editable>
     <DataGridColumn TItem="ExerciseLog" Field="Reps" Caption="Reps"></DataGridColumn>
     <DataGridColumn TItem="ExerciseLog" Field="Duration" Caption="Duration"></DataGridColumn>
     <DataGridColumn TItem="ExerciseLog" Field="Exercise.Description" Caption="exercise">
     </DataGridColumn>
     <DataGridColumn TItem="ExerciseLog" Field="Workout.Name" Caption="Workout"></DataGridColumn>
+    <DataGridCommandColumn TItem="ExerciseLog" Caption="Action">
+			<EditCommandTemplate>
+				<Button Color="Color.Primary" Clicked="() => EditExerciseLog(context)">Edit</Button>
 
+			</EditCommandTemplate>
+        </DataGridCommandColumn>
 
 </DataGrid>
 
