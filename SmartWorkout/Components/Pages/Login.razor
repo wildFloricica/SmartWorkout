@@ -1,0 +1,81 @@
+﻿@page "/"
+@using SmartWorkout.Components.Layout
+@using SmartWorkout.Context
+@using SmartWorkout.DTOs
+@layout NoNav
+<PageTitle>Login</PageTitle>
+
+
+
+<style>
+	
+</style>
+
+<main class="comfy">
+
+<EditForm Model="@loginDto" OnValidSubmit=@TryLogin FormName="trylogin">
+	<div class="form-group">
+		<label>email:</label>
+		<div>
+			<InputText @bind-Value="@loginDto.email" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => loginDto.email)" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label>password (month+year):</label>
+		<div>
+			<InputText @bind-Value="@loginDto.password" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => loginDto.password)" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<input type="submit" class="btn btn-primary" value="Save" />
+	</div>
+</EditForm>
+
+
+@if (FailedLogin)
+{
+	
+<h1> failed login</h1>
+}
+
+</main>
+
+@code {
+	[SupplyParameterFromForm]
+	LoginDto loginDto { get; set; } = new LoginDto();
+
+
+	[Inject]
+	SmartWorkoutContext context { get; set; }
+	[Inject]
+	private NavigationManager Navigation { get; set; }
+
+
+	public Boolean FailedLogin = false;
+
+	public async Task TryLogin()
+	{
+
+
+		var user = context.Users.FirstOrDefault(u => u.Email == loginDto.email);
+		if (user != null)
+		{
+			var ssss = user.Birthday.ToString("MMyyyy");
+			if (ssss== loginDto.password)
+			{
+				await InvokeAsync(() => Navigation.NavigateTo($"/exercise-logs"));
+				_ = "letsgooo";
+
+			}
+		}
+
+		FailedLogin = true;
+
+
+	}
+}
+
+

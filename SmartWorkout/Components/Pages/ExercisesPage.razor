@@ -24,14 +24,12 @@
 			<EditCommandTemplate>
 				@if(WorkoutId != null)
 				{
-				<Button Color="Color.Primary" Clicked="() => CreateExerciseLog(context)">CreateExerciseLog</Button>
-					
+					<Button Color="Color.Primary" Clicked="() => CreateExerciseLog(context)">CreateExerciseLog</Button>
 				}
-					@if (WorkoutId == null)
-					{
+				@if (WorkoutId == null)
+				{
 					<Button Color="Color.Primary" Clicked="() => EditExercise(context)">Edit</Button>
-
-					}
+				}
 			</EditCommandTemplate>
 
 

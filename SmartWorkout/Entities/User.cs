@@ -10,6 +10,8 @@ namespace SmartWorkout.Entities
         public DateTime Birthday { get; set; }
         public string Gender { get; set; }
         public ICollection<Workout> Workouts { get; } = new List<Workout>();
+        public string? Email { get; set; }
+        public Boolean IsTrainer { get; set; } = false;
     }
 }
 
