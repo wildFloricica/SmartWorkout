@@ -30,5 +30,10 @@ namespace SmartWorkout.Repositories.Implementations
             });
             _context.SaveChanges();
         }
-    }
+		public IEnumerable<Workout> GetUserWorkouts(int userId)
+        {
+           return _context.Workouts.Where(it=>it.UserId == userId).Include(u=>u.User).ToList();
+        }
+
+	}
 }

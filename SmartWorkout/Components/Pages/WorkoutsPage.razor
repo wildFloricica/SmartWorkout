@@ -1,10 +1,15 @@
 ﻿@using SmartWorkout.Entities
 @page "/workouts"
+@page "/workouts/{UserId:int?}"
 @rendermode InteractiveServer
-<h3>Workouts Page</h3>
+<h3>Workouts</h3>
 
 
 
+@if(UserId != null)
+{
+	<h1>User: <Button Color="Color.Success">@workouts?.FirstOrDefault()?.User?.FirstName</Button></h1>
+}
 
 <DataGrid TItem="Workout"
 		  Data="@workouts"
@@ -13,6 +18,8 @@
 	<DataGridColumns>
 		<DataGridColumn TItem="Workout" Field="Name" Caption="Name"></DataGridColumn>
 		<DataGridColumn TItem="Workout" Field="Date" Caption="Date"></DataGridColumn>
+	
+		@if(UserId == null){
 		<DataGridColumn TItem="Workout" Field="User.FirstName" Caption="User">
 			<DisplayTemplate>
 				@{
@@ -26,15 +33,13 @@
 			</DisplayTemplate>
 
 		</DataGridColumn>
-
-		<DataGridCommandColumn TItem="Workout">
+		}
+		<DataGridCommandColumn TItem="Workout" NewCommandAllowed=false>
 			<EditCommandTemplate>
-				<Button Color="Color.Primary" Clicked="() => GoToExercises(context)">GoToExercise</Button>
-
+				<Button Color="Color.Primary" Clicked="() => GoToExercises(context)">Create ExerciseLog</Button>
 			</EditCommandTemplate>
 		</DataGridCommandColumn>
 	</DataGridColumns>
 
 </DataGrid>
 
-<a href="workout/add">add or edit workout</a>

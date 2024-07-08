@@ -6,6 +6,24 @@ using SmartWorkout.Repositories.Interfaces;
 
 namespace SmartWorkout.Repositories.Implementations
 {
+	//public interface Test<T> where T: class
+	//{
+	//	void Add(T entity);	
+	//}
+	//public class Generic<T> : Test<T> where T : class
+	//{
+	//	protected readonly SmartWorkoutContext _context;
+ //       public Generic(SmartWorkoutContext context)
+ //       {
+	//		_context = context;
+	//		_context.Set<T>();
+
+ //       }
+ //       public void Add(T entity)
+	//	{
+	//		throw new NotImplementedException();
+	//	}
+	//}
 	public class ExerciseLogRepository : IExerciseLogRepository
     {
         private readonly SmartWorkoutContext _context;
@@ -33,6 +51,8 @@ namespace SmartWorkout.Repositories.Implementations
         }
 
 
+
+
 		public ExerciseLogDto GetById(int id)
         {
 			var exerciseLog = _context.ExerciseLogs.SingleOrDefault(u => u.Id == id);
@@ -50,6 +70,8 @@ namespace SmartWorkout.Repositories.Implementations
 		public void Edit(ExerciseLogDto exerciseLogDto)
 		{
 			var exerciseLog = _context.ExerciseLogs.SingleOrDefault(u => u.Id == exerciseLogDto.Id);
+
+			var asjkdas = _context.ExerciseLogs.Where(u => u.Id == exerciseLogDto.Id).ToQueryString();
 
 			if (exerciseLog != null)
 			{

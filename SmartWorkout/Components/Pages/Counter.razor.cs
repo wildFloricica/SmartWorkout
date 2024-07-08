@@ -4,7 +4,7 @@ namespace SmartWorkout.Components.Pages
 
     public partial class Counter
     {
-        private int currentCount = 0;
+        private static int currentCount = 0;
 
         bool visible = true;
 

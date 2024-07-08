@@ -3,7 +3,7 @@
 @rendermode InteractiveServer
 
 
-<h3>Users page</h3>
+<h3>Users</h3>
 
 
 
@@ -23,6 +23,7 @@
 			<EditCommandTemplate>
 				<Button Color="Color.Primary" Clicked="() => EditUser(context)">Edit</Button>
 				<Button Color="Color.Primary" Clicked="() => AddWorkout(context)">AddWorkout</Button>
+				<Button Color="Color.Primary" Clicked="() => SeeWorkouts(context)">See Workouts</Button>
 
 			</EditCommandTemplate>
 			<DeleteCommandTemplate >
@@ -36,9 +37,6 @@
 	</DataGridColumns>
 
 </DataGrid>
-
-<a href="/user/add">add or edit user</a>
-
 
 
 @* <ul>

@@ -1,40 +1,58 @@
 ﻿@using SmartWorkout.Entities
 @page "/exercises"
-@page  "/exercises/{WorkoutId:int?}"
+@page "/exercises/{WorkoutId:int?}"
 @rendermode InteractiveServer
-<h3>Exercise Page</h3>
+<h3>Exercises</h3>
 
 
 
+@if(WorkoutId != null)
+{
+	<h1> Select exercise to create exercise log</h1>
+}
 
-
-<DataGrid 
-	TItem="Exercise" 
-	Data="@ExercisesList" 
-	Sortable
-	Responsive
-	Editable>
-    <DataGridColumns>
+<DataGrid TItem="Exercise"
+		  Data="@ExercisesList"
+		  Sortable
+		  Responsive
+		  Editable>
+	<DataGridColumns>
 		<DataGridColumn TItem="Exercise" Field="Description" Caption="Description" Sortable="false" Displayable="true" />
 		<DataGridColumn TItem="Exercise" Field="Type" Caption="Type" Sortable="false" Displayable="true" />
 
-		<DataGridCommandColumn TItem="Exercise" Caption="Action" NewCommandAllowed="false">
+		<DataGridCommandColumn TItem="Exercise" Caption="Action">
 			<EditCommandTemplate>
-				<Button Color="Color.Primary" Clicked="() => EditExercise(context)">Edit</Button>
-				@if (WorkoutId != null)
+				@if(WorkoutId != null)
 				{
-					<Button Color="Color.Primary" Clicked="() => CreateExerciseLog(context)">CreateExerciseLog</Button>
-
+				<Button Color="Color.Primary" Clicked="() => CreateExerciseLog(context)">CreateExerciseLog</Button>
+					
 				}
+					@if (WorkoutId == null)
+					{
+					<Button Color="Color.Primary" Clicked="() => EditExercise(context)">Edit</Button>
+
+					}
 			</EditCommandTemplate>
+
+
 			<DeleteCommandTemplate>
-				<Button Color="Color.Secondary" Clicked="() => DeleteExercise(context)">Deletee</Button>
+				@if (WorkoutId == null)
+				{
+					<Button Color
+					="Color.Secondary" Clicked
+					="() => DeleteExercise(context)">Deletee</Button>
+				}
 			</DeleteCommandTemplate>
+			<NewCommandTemplate>
+				@if (WorkoutId == null)
+				{
+					<a href="exercise/add"><Button Color="Color.Secondary">New Exercise</Button></a>
+				}
+			</NewCommandTemplate>
 		</DataGridCommandColumn>
 	</DataGridColumns>
-	
+
 </DataGrid>
 
 
-<a href="/exercise/add">add or edit exercise</a>
 

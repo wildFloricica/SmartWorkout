@@ -10,14 +10,14 @@
 <EditForm Model="@exerciseLogDto" OnValidSubmit=@SaveExerciseLog FormName="editForm">
 	<DataAnnotationsValidator />
 	<InputNumber @bind-Value="exerciseLogDto.Id" hidden/>
-	<div class="form-group">
+	<div class="form-group" hidden>
 		<label>WorkoutId :</label>
 		<div>
 			<InputNumber @bind-Value="exerciseLogDto.WorkoutId" class="form-control col-sm-3" />
 			<ValidationMessage For="@(() => exerciseLogDto.WorkoutId)" />
 		</div>
 	</div>
-	<div class="form-group">
+	<div class="form-group" hidden>
 		<label>ExerciseId :</label>
 		<div>
 			<InputNumber @bind-Value="exerciseLogDto.ExerciseId" class="form-control col-sm-3" />
