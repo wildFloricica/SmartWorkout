@@ -2,4 +2,7 @@
 
 email unic + edit email + formatu emailului cu regex // done
 
+carduri la workout / imagini cu user in cardurile alea
+schimba culori / tema
+
 data viitoare cu policyuri

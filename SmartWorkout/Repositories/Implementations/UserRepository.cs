@@ -28,7 +28,8 @@ namespace SmartWorkout.Repositories.Implementations
 				Birthday = userDto.Birthday,
 				Gender = userDto.Gender,
 				FirstName = userDto.FirstName,
-				LastName = userDto.LastName
+				LastName = userDto.LastName,
+				Email = userDto.Email,
 			});
 			_context.SaveChanges();
 		}
