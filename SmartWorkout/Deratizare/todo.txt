@@ -1,5 +1,5 @@
 ﻿baga date frumoase in db
 
-email unic + edit email + formatu emailului cu regex
+email unic + edit email + formatu emailului cu regex // done
 
 data viitoare cu policyuri

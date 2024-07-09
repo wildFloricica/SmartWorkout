@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartWorkout.Entities
 {
@@ -10,8 +11,9 @@ namespace SmartWorkout.Entities
         public DateTime Birthday { get; set; }
         public string Gender { get; set; }
         public ICollection<Workout> Workouts { get; } = new List<Workout>();
+        [EmailAddress]
         public string? Email { get; set; }
-        public Boolean IsTrainer { get; set; } = false;
+		public Boolean IsTrainer { get; set; } = false;
     }
 }
 

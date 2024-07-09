@@ -17,6 +17,8 @@ namespace SmartWorkout.DTOs
         public string Gender { get; set; }
 
         public bool Exist { get; set; } = true;
+        [EmailAddress (ErrorMessage ="The Email Adress is not valid")]
+        public string? Email { get; set; }
 
         public static UserDto FromEntity(User user)
         {
