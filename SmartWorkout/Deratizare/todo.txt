@@ -1,8 +1,9 @@
-﻿baga date frumoase in db
-
-email unic + edit email + formatu emailului cu regex // done
-
+﻿//todo
 carduri la workout / imagini cu user in cardurile alea
 schimba culori / tema
 
-data viitoare cu policyuri
+
+// done
+baga date frumoase in db
+email unic + edit email + formatu emailului cu regex // done
+

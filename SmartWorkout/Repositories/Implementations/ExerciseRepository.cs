@@ -36,8 +36,8 @@ namespace SmartWorkout.Repositories.Implementations
 			exerciseDto.Exist = exercise != null;
 			if (exercise != null)
 			{
-				exerciseDto.Type = exerciseDto.Type;
-				exerciseDto.Description = exerciseDto.Description;
+				exerciseDto.Type = exercise.Type;
+				exerciseDto.Description = exercise.Description;
 			}
 			return exerciseDto;
 		}
