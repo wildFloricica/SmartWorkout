@@ -1,7 +1,8 @@
-﻿@using SmartWorkout.Entities
+﻿@using Microsoft.AspNetCore.Authorization
+@using SmartWorkout.Entities
 @page "/users"
 @rendermode InteractiveServer
-
+@attribute [Authorize(Roles = "User")]
 
 <h3>Users</h3>
 

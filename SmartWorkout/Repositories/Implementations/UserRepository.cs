@@ -67,5 +67,25 @@ namespace SmartWorkout.Repositories.Implementations
 		{
 			if(id != null) _context.Users.Where(u => u.Id == id).ExecuteDelete();
 		}
+
+
+
+		public bool existsByEmail(string email)
+		{
+			User existingUser = _context.Users.FirstOrDefault(x => x.Email == email);
+
+			if (existingUser != null)
+			{
+				return true;
+			}
+			return false;
+		}
+
+	
+
+		public User GetUserByEmail(string email)
+		{
+			return _context.Users.FirstOrDefault(x => x.Email == email);
+		}
 	}
 }

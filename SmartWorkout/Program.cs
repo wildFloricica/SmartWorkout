@@ -1,18 +1,32 @@
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using BlazorServerAuthenticationAndAuthorization.Authentication;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
 using SmartWorkout.Components;
 using SmartWorkout.Context;
 using SmartWorkout.Repositories.Implementations;
 using SmartWorkout.Repositories.Interfaces;
+using SmartWorkout.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddAuthenticationCore();
+builder.Services.AddScoped<ProtectedSessionStorage>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+
+
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+
+builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services
     .AddBlazorise(options =>
     {
@@ -20,6 +34,9 @@ builder.Services
     })
     .AddBootstrapProviders()
     .AddFontAwesomeIcons();
+
+builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+
 
 builder.Services.AddDbContext<SmartWorkoutContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
 

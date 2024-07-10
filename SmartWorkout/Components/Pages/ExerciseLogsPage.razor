@@ -1,6 +1,8 @@
-﻿@using SmartWorkout.Entities
+﻿@using Microsoft.AspNetCore.Authorization
+@using SmartWorkout.Entities
 @page "/exercise-logs"
 @rendermode InteractiveServer
+@attribute [Authorize(Roles ="Administrator")]
 
 <h3>ExerciseLogs</h3>
 

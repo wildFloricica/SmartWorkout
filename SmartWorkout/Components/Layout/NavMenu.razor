@@ -16,10 +16,14 @@
 
 		<div class="nav-item px-3 d-flex">
 
+			<AuthorizeView>
+				<Authorized>
+					<NavLink class="nav-link" href="users" Match="NavLinkMatch.All">
+						<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Users
+					</NavLink>
 
-			<NavLink class="nav-link" href="users" Match="NavLinkMatch.All">
-				<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Users
-			</NavLink>
+				</Authorized>
+			</AuthorizeView>
 			<NavLink class="nav-link w-auto" href="user/add" Match="NavLinkMatch.All">
 				<span class="m-0 m-0 bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
 			</NavLink>

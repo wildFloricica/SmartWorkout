@@ -11,6 +11,10 @@ namespace SmartWorkout.Repositories.Interfaces
         public void EditUser(UserDto userDto);
 	    
         public void DeleteUser(int? id);
-    }
+
+
+		public User GetUserByEmail (string email);
+
+	}
 
 }

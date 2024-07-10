@@ -2,9 +2,10 @@
 @using SmartWorkout.Components.Layout
 @using SmartWorkout.Context
 @using SmartWorkout.DTOs
+@using SmartWorkout.Services.Interfaces
 @layout NoNav
 <PageTitle>Login</PageTitle>
-
+@rendermode InteractiveServer
 
 
 <style>
@@ -35,47 +36,37 @@
 </EditForm>
 
 
-@if (FailedLogin)
-{
-	
-<h1> failed login</h1>
-}
+
+		<h1> @ErrorMessage</h1>
 
 </main>
 
 @code {
-	[SupplyParameterFromForm]
-	LoginDto loginDto { get; set; } = new LoginDto();
+	public bool FailedLogin = false;
 
+	[SupplyParameterFromForm]
+	public LoginDto loginDto { get; set; } = new LoginDto();
 
 	[Inject]
-	SmartWorkoutContext context { get; set; }
+	public IAuthorizationService authorizationService { get; set; }
 	[Inject]
 	private NavigationManager Navigation { get; set; }
-
-
-	public Boolean FailedLogin = false;
-
-	public async Task TryLogin()
+	public string ErrorMessage { get; set; }
+	public void TryLogin()
 	{
-
-
-		var user = context.Users.FirstOrDefault(u => u.Email == loginDto.email);
-		if (user != null)
+		try
 		{
-			var ssss = user.Birthday.ToString("MMyyyy");
-			if (ssss== loginDto.password)
-			{
-				await InvokeAsync(() => Navigation.NavigateTo($"/exercise-logs"));
-				_ = "letsgooo";
+			authorizationService.Login(loginDto);
+			Navigation.NavigateTo("/users", true);
 
-			}
 		}
-
-		FailedLogin = true;
-
-
+		catch(Exception e)
+		{
+			Console.WriteLine(e);
+			ErrorMessage = e.Message;
+		}
 	}
+
 }
 
 
