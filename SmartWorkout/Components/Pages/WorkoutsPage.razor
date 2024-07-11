@@ -3,6 +3,7 @@
 @page "/workouts/{UserId:int?}"
 @rendermode InteractiveServer
 
+
 <AuthorizeView Context="authContext">
 	<NotAuthorized>
 		Only Admins Have Acces To This page <a href="/">go back</a>
@@ -41,11 +42,16 @@
 
 					</DataGridColumn>
 				}
-				<DataGridCommandColumn TItem="Workout" NewCommandAllowed=false>
-					<EditCommandTemplate>
-						<Button Color="Color.Primary" Clicked="() => GoToExercises(context)">Create ExerciseLog</Button>
-					</EditCommandTemplate>
-				</DataGridCommandColumn>
+
+				<AuthorizeView Roles="Administrator" Context="authContaext">
+					<Authorized>
+						<DataGridCommandColumn TItem="Workout" NewCommandAllowed=false>
+							<EditCommandTemplate>
+								<Button Color="Color.Primary" Clicked="() => GoToExercises(context)">Create ExerciseLog</Button>
+							</EditCommandTemplate>
+						</DataGridCommandColumn>
+					</Authorized>
+				</AuthorizeView>
 			</DataGridColumns>
 
 		</DataGrid>

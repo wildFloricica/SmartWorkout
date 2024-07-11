@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using SmartWorkout.Entities
+<div class="top-row ps-3 navbar navbar-dark">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="">SmartWorkout</a>
 	</div>
@@ -40,9 +42,9 @@
 		</AuthorizeView>
 		<div class="nav-item px-3 d-flex">
 
-			<NavLink class="nav-link" href="workouts" Match="NavLinkMatch.All">
+			<Button class="nav-link" Match="NavLinkMatch.All" Clicked="@GoToWorkouts">
 				<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Workouts
-			</NavLink>
+			</Button>
 
 		</div>
 		<div class="nav-item px-3 d-flex">
@@ -56,3 +58,29 @@
 	</nav>
 </div>
 
+
+@code{
+	[Inject]
+
+	private ProtectedSessionStorage SessionStorage { get; set; }
+	[Inject]
+	public NavigationManager NavigationManager{ get; set; }
+
+	public async void GoToWorkouts()
+	{
+		var user = await SessionStorage.GetAsync<User>("User");
+		if (user.Value == null)
+		{
+			NavigationManager.NavigateTo($"/workouts/");
+			return;
+		}
+		else
+		{
+			if(user.Value.IsTrainer)
+				NavigationManager.NavigateTo($"/workouts/");
+
+			else NavigationManager.NavigateTo($"/workouts/{user.Value.Id}");
+		}
+	}
+
+		}

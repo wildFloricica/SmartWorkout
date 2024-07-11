@@ -10,6 +10,7 @@ using SmartWorkout.Context;
 using SmartWorkout.Repositories.Implementations;
 using SmartWorkout.Repositories.Interfaces;
 using SmartWorkout.Services.Interfaces;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,9 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication();
 builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-
-
-
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

@@ -2,6 +2,7 @@
 @using SmartWorkout.Components.Layout
 @using SmartWorkout.Context
 @using SmartWorkout.DTOs
+@using SmartWorkout.Repositories.Interfaces
 @using SmartWorkout.Services.Interfaces
 @layout NoNav
 <PageTitle>Login</PageTitle>
@@ -51,13 +52,17 @@
 	public IAuthorizationService authorizationService { get; set; }
 	[Inject]
 	private NavigationManager Navigation { get; set; }
+	[Inject]
+	private IUserRepository _userRepository{ get; set; }
 	public string ErrorMessage { get; set; }
 	public void TryLogin()
 	{
 		try
 		{
 			authorizationService.Login(loginDto);
-			Navigation.NavigateTo("/users", true);
+			var user = _userRepository.GetUserByEmail(loginDto.email);
+			if (user.IsTrainer) Navigation.NavigateTo("users", true);
+			else Navigation.NavigateTo("/exercise-logs", true);
 
 		}
 		catch(Exception e)
