@@ -2,44 +2,53 @@
 @page "/workouts"
 @page "/workouts/{UserId:int?}"
 @rendermode InteractiveServer
-<h3>Workouts</h3>
+
+<AuthorizeView Context="authContext">
+	<NotAuthorized>
+		Only Admins Have Acces To This page <a href="/">go back</a>
+	</NotAuthorized>
+	<Authorized>
 
 
+		<h3>Workouts</h3>
 
-@if(UserId != null)
-{
-	<h1>User: <Button Color="Color.Success">@workouts?.FirstOrDefault()?.User?.FirstName</Button></h1>
-}
-
-<DataGrid TItem="Workout"
-		  Data="@workouts"
-		  Responsive
-		Editable>
-	<DataGridColumns>
-		<DataGridColumn TItem="Workout" Field="Name" Caption="Name"></DataGridColumn>
-		<DataGridColumn TItem="Workout" Field="Date" Caption="Date"></DataGridColumn>
-	
-		@if(UserId == null){
-		<DataGridColumn TItem="Workout" Field="User.FirstName" Caption="User">
-			<DisplayTemplate>
-				@{
-					var date = (context as Workout)?.User;
-
-					if (date != null)
-					{
-						@($"{date.FirstName} {date.LastName}")
-					}
-				}
-			</DisplayTemplate>
-
-		</DataGridColumn>
+		@if (UserId != null)
+		{
+			<h1>User: <Button Color="Color.Success">@workouts?.FirstOrDefault()?.User?.FirstName</Button></h1>
 		}
-		<DataGridCommandColumn TItem="Workout" NewCommandAllowed=false>
-			<EditCommandTemplate>
-				<Button Color="Color.Primary" Clicked="() => GoToExercises(context)">Create ExerciseLog</Button>
-			</EditCommandTemplate>
-		</DataGridCommandColumn>
-	</DataGridColumns>
 
-</DataGrid>
+		<DataGrid TItem="Workout"
+				  Data="@workouts"
+				  Responsive
+				  Editable>
+			<DataGridColumns>
+				<DataGridColumn TItem="Workout" Field="Name" Caption="Name"></DataGridColumn>
+				<DataGridColumn TItem="Workout" Field="Date" Caption="Date"></DataGridColumn>
 
+				@if (UserId == null)
+				{
+					<DataGridColumn TItem="Workout" Field="User.FirstName" Caption="User">
+						<DisplayTemplate>
+							@{
+								var user = (context as Workout)?.User;
+
+								if (user != null)
+								{
+									@($"{user.FirstName} {user.LastName}")
+								}
+							}
+						</DisplayTemplate>
+
+					</DataGridColumn>
+				}
+				<DataGridCommandColumn TItem="Workout" NewCommandAllowed=false>
+					<EditCommandTemplate>
+						<Button Color="Color.Primary" Clicked="() => GoToExercises(context)">Create ExerciseLog</Button>
+					</EditCommandTemplate>
+				</DataGridCommandColumn>
+			</DataGridColumns>
+
+		</DataGrid>
+
+	</Authorized>
+</AuthorizeView>

@@ -1,37 +1,44 @@
 ﻿@using SmartWorkout.Entities
 @page "/workout/add/{UserId:int}"
-<h3>AddOrEdit Workout</h3>
 
-<div>@userDto.FirstName</div>
+<AuthorizeView Roles="Administrator" Context="authContext">
+	<NotAuthorized>
+		Only Admins Have Acces To This page <a href="/">go back</a>
+	</NotAuthorized>
+	<Authorized>
+		<h3>AddOrEdit Workout</h3>
+
+		<div>@userDto.FirstName</div>
+
+		<EditForm Model="@workoutDto" OnValidSubmit=@SaveWorkout FormName="editForm">
+			<DataAnnotationsValidator />
 
 
-<EditForm Model="@workoutDto" OnValidSubmit=@SaveWorkout FormName="editForm">
-	<DataAnnotationsValidator />
+			<div class="form-group" hidden>
+				<label>UserId :</label>
+				<div>
+					<InputNumber @bind-Value="workoutDto.UserId" class="form-control col-sm-3" />
+					<ValidationMessage For="@(() => workoutDto.UserId)" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Name :</label>
+				<div>
+					<InputText @bind-Value="workoutDto.Name" class="form-control col-sm-3" />
+					<ValidationMessage For="@(() => workoutDto.Name)" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Date :</label>
+				<div>
+					<InputDate @bind-Value="workoutDto.Date" class="form-control col-sm-3" />
+					<ValidationMessage For="@(() => workoutDto.Date)" />
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary" value="Save" />
+			</div>
+		</EditForm>
 
-
-	<div class="form-group" hidden>
-		<label>UserId :</label>
-		<div>
-			<InputNumber @bind-Value="workoutDto.UserId" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => workoutDto.UserId)" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label>Name :</label>
-		<div>
-			<InputText @bind-Value="workoutDto.Name" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => workoutDto.Name)" />
-		</div>
-	</div>
-	<div class="form-group">
-		<label>Date :</label>
-		<div>
-			<InputDate @bind-Value="workoutDto.Date" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => workoutDto.Date)" />
-		</div>
-	</div>
-	<div class="form-group">
-		<input type="submit" class="btn btn-primary" value="Save" />
-	</div>
-</EditForm>
-
+	</Authorized>
+</AuthorizeView>

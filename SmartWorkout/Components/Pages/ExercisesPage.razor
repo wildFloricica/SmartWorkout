@@ -2,55 +2,66 @@
 @page "/exercises"
 @page "/exercises/{WorkoutId:int?}"
 @rendermode InteractiveServer
-<h3>Exercises</h3>
 
 
 
-@if(WorkoutId != null)
-{
-	<h1> Select exercise to create exercise log</h1>
-}
+<AuthorizeView Roles="Administrator" Context="authContext">
+	<NotAuthorized>
+		Only Admins Have Acces To This page <a href="/">go back</a>
+	</NotAuthorized>
+	<Authorized>
 
-<DataGrid TItem="Exercise"
-		  Data="@ExercisesList"
-		  Sortable
-		  Responsive
-		  Editable>
-	<DataGridColumns>
-		<DataGridColumn TItem="Exercise" Field="Description" Caption="Description" Sortable="false" Displayable="true" />
-		<DataGridColumn TItem="Exercise" Field="Type" Caption="Type" Sortable="false" Displayable="true" />
-
-		<DataGridCommandColumn TItem="Exercise" Caption="Action">
-			<EditCommandTemplate>
-				@if(WorkoutId != null)
-				{
-					<Button Color="Color.Primary" Clicked="() => CreateExerciseLog(context)">CreateExerciseLog</Button>
-				}
-				@if (WorkoutId == null)
-				{
-					<Button Color="Color.Primary" Clicked="() => EditExercise(context)">Edit</Button>
-				}
-			</EditCommandTemplate>
-
-
-			<DeleteCommandTemplate>
-				@if (WorkoutId == null)
-				{
-					<Button Color
-					="Color.Secondary" Clicked
-					="() => DeleteExercise(context)">Deletee</Button>
-				}
-			</DeleteCommandTemplate>
-			<NewCommandTemplate>
-				@if (WorkoutId == null)
-				{
-					<a href="exercise/add"><Button Color="Color.Secondary">New Exercise</Button></a>
-				}
-			</NewCommandTemplate>
-		</DataGridCommandColumn>
-	</DataGridColumns>
-
-</DataGrid>
+		<h3>Exercises</h3>
 
 
 
+		@if (WorkoutId != null)
+		{
+			<h1> Select exercise to create exercise log</h1>
+		}
+
+		<DataGrid TItem="Exercise"
+				  Data="@ExercisesList"
+				  Sortable
+				  Responsive
+				  Editable>
+			<DataGridColumns>
+				<DataGridColumn TItem="Exercise" Field="Description" Caption="Description" Sortable="false" Displayable="true" />
+				<DataGridColumn TItem="Exercise" Field="Type" Caption="Type" Sortable="false" Displayable="true" />
+
+				<DataGridCommandColumn TItem="Exercise" Caption="Action">
+					<EditCommandTemplate>
+						@if (WorkoutId != null)
+						{
+							<Button Color="Color.Primary" Clicked="() => CreateExerciseLog(context)">CreateExerciseLog</Button>
+						}
+						@if (WorkoutId == null)
+						{
+							<Button Color="Color.Primary" Clicked="() => EditExercise(context)">Edit</Button>
+						}
+					</EditCommandTemplate>
+
+
+					<DeleteCommandTemplate>
+						@if (WorkoutId == null)
+						{
+							<Button Color="Color.Secondary" Clicked="() => DeleteExercise(context)">
+								Deletee
+							</Button>
+						}
+					</DeleteCommandTemplate>
+					<NewCommandTemplate>
+						@if (WorkoutId == null)
+						{
+							<a href="exercise/add"><Button Color="Color.Secondary">New Exercise</Button></a>
+						}
+					</NewCommandTemplate>
+				</DataGridCommandColumn>
+			</DataGridColumns>
+
+		</DataGrid>
+
+
+
+	</Authorized>
+</AuthorizeView>

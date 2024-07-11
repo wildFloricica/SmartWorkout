@@ -14,45 +14,45 @@
 			</NavLink>
 		</div>
 
-		<div class="nav-item px-3 d-flex">
+		<AuthorizeView Roles="Administrator" Context="authContext">
+			<Authorized>
+				<div class="nav-item px-3 d-flex">
 
-			<AuthorizeView>
-				<Authorized>
 					<NavLink class="nav-link" href="users" Match="NavLinkMatch.All">
 						<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Users
 					</NavLink>
 
-				</Authorized>
-			</AuthorizeView>
-			<NavLink class="nav-link w-auto" href="user/add" Match="NavLinkMatch.All">
-				<span class="m-0 m-0 bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
-			</NavLink>
-		</div>
+					<NavLink class="nav-link w-auto" href="user/add" Match="NavLinkMatch.All">
+						<span class="m-0 m-0 bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
+					</NavLink>
+				</div>
 
-		<div class="nav-item px-3 d-flex">
+				<div class="nav-item px-3 d-flex">
 
-			<NavLink class="nav-link" href="exercises" Match="NavLinkMatch.All">
-				<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Exercises
-			</NavLink> 
-			<NavLink class="nav-link w-auto" href="exercise/add" Match="NavLinkMatch.All">
-				<span class="m-0 bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
-			</NavLink>
-		</div>
+					<NavLink class="nav-link" href="exercises" Match="NavLinkMatch.All">
+						<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Exercises
+					</NavLink>
+					<NavLink class="nav-link w-auto" href="exercise/add" Match="NavLinkMatch.All">
+						<span class="m-0 bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
+					</NavLink>
+				</div>
+			</Authorized>
+		</AuthorizeView>
 		<div class="nav-item px-3 d-flex">
 
 			<NavLink class="nav-link" href="workouts" Match="NavLinkMatch.All">
 				<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Workouts
 			</NavLink>
-			
+
 		</div>
 		<div class="nav-item px-3 d-flex">
 
 			<NavLink class="nav-link" href="exercise-logs" Match="NavLinkMatch.All">
 				<span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> ExerciseLogs
 			</NavLink>
-		
+
 		</div>
-		
+
 	</nav>
 </div>
 

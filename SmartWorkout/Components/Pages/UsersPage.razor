@@ -2,48 +2,42 @@
 @using SmartWorkout.Entities
 @page "/users"
 @rendermode InteractiveServer
-@attribute [Authorize(Roles = "User")]
-
-<h3>Users</h3>
 
 
 
+<AuthorizeView Roles="Administrator" Context="authContext">
+	<NotAuthorized>
+		Only Admins Have Acces To This page <a href="/">go back</a>
+	</NotAuthorized>
+	<Authorized>
+		
+		<h3>Users</h3>
+		<DataGrid TItem="User"
+				  Data="@UsersList"
+				  Responsive
+				  Editable>
+			<DataGridColumns>
+				<DataGridColumn TItem="User" Field="FirstName" Caption="First Name" Sortable="false" Displayable="true" />
+				<DataGridColumn TItem="User" Field="LastName" Caption="Last Name" Sortable="false" Displayable="true" />
+				<DataGridColumn TItem="User" Field="Birthday" Caption="Birthday" Sortable="false" Displayable="true" />
+				<DataGridColumn TItem="User" Field="Gender" Caption="Gender" Sortable="false" Displayable="true" />
+				<DataGridColumn TItem="User" Field="Email" Caption="Email" Sortable="false" Displayable="true" />
 
+				<DataGridCommandColumn TItem="User" Caption="Action">
+					<EditCommandTemplate>
+						<Button Color="Color.Primary" Clicked="() => EditUser(context)">Edit</Button>
+						<Button Color="Color.Primary" Clicked="() => AddWorkout(context)">AddWorkout</Button>
+						<Button Color="Color.Primary" Clicked="() => SeeWorkouts(context)">See Workouts</Button>
+					</EditCommandTemplate>
+					<DeleteCommandTemplate>
+						<Button Color="Color.Secondary" Clicked="() => DeleteUser(context)">Deletee</Button>
+					</DeleteCommandTemplate>
+					<NewCommandTemplate>
+						<Button Color="Color.Secondary" Clicked="() => AddUser()">+ Add User</Button>
+					</NewCommandTemplate>
+				</DataGridCommandColumn>
+			</DataGridColumns>
+		</DataGrid>
 
-<DataGrid TItem="User"
-		  Data="@UsersList"
-		  Responsive
-			Editable>
-	<DataGridColumns>
-		<DataGridColumn TItem="User" Field="FirstName" Caption="First Name" Sortable="false" Displayable="true" />
-		<DataGridColumn TItem="User" Field="LastName" Caption="Last Name" Sortable="false" Displayable="true" />
-		<DataGridColumn TItem="User" Field="Birthday" Caption="Birthday" Sortable="false" Displayable="true" />
-		<DataGridColumn TItem="User" Field="Gender" Caption="Gender" Sortable="false" Displayable="true" />
-		<DataGridColumn TItem="User" Field="Email" Caption="Email" Sortable="false" Displayable="true" />
-
-		<DataGridCommandColumn TItem="User" Caption="Action">
-			<EditCommandTemplate>
-				<Button Color="Color.Primary" Clicked="() => EditUser(context)">Edit</Button>
-				<Button Color="Color.Primary" Clicked="() => AddWorkout(context)">AddWorkout</Button>
-				<Button Color="Color.Primary" Clicked="() => SeeWorkouts(context)">See Workouts</Button>
-
-			</EditCommandTemplate>
-			<DeleteCommandTemplate >
-				<Button Color="Color.Secondary" Clicked="() => DeleteUser(context)">Deletee</Button>
-			</DeleteCommandTemplate>
-
-			<NewCommandTemplate>
-				<Button Color="Color.Secondary" Clicked="() => AddUser()">+ Add User</Button>
-			</NewCommandTemplate>
-		</DataGridCommandColumn>
-	</DataGridColumns>
-
-</DataGrid>
-
-
-@* <ul>
-   <li>
-			<span>@user.FirstName @user.LastName</span>
-			<span>@user.Birthday.ToString() + @user.Gender</span>
-   </li>
-</ul> *@
+	</Authorized>
+</AuthorizeView>

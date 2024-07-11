@@ -2,27 +2,28 @@
 @using SmartWorkout.Entities
 @page "/exercise-logs"
 @rendermode InteractiveServer
-@attribute [Authorize(Roles ="Administrator")]
 
 <h3>ExerciseLogs</h3>
 
 
+<DataGrid TItem="ExerciseLog"
+		  Data="@exerciseLogs"
+		  Sortable
+		  Responsive Editable>
+	<DataGridColumn TItem="ExerciseLog" Field="Reps" Caption="Reps"></DataGridColumn>
+	<DataGridColumn TItem="ExerciseLog" Field="Duration" Caption="Duration"></DataGridColumn>
+	<DataGridColumn TItem="ExerciseLog" Field="Exercise.Description" Caption="exercise">
+	</DataGridColumn>
+	<DataGridColumn TItem="ExerciseLog" Field="Workout.Name" Caption="Workout"></DataGridColumn>
 
-<DataGrid  TItem="ExerciseLog"
-          Data="@exerciseLogs"
-          Sortable
-          Responsive Editable>
-    <DataGridColumn TItem="ExerciseLog" Field="Reps" Caption="Reps"></DataGridColumn>
-    <DataGridColumn TItem="ExerciseLog" Field="Duration" Caption="Duration"></DataGridColumn>
-    <DataGridColumn TItem="ExerciseLog" Field="Exercise.Description" Caption="exercise">
-    </DataGridColumn>
-    <DataGridColumn TItem="ExerciseLog" Field="Workout.Name" Caption="Workout"></DataGridColumn>
-    <DataGridCommandColumn TItem="ExerciseLog" Caption="Action" NewCommandAllowed=false>
-			<EditCommandTemplate>
-				<Button Color="Color.Primary" Clicked="() => EditExerciseLog(context)">Edit</Button>
-			</EditCommandTemplate>
-        </DataGridCommandColumn>
 
+	<AuthorizeView Roles="Administrator" Context="authContext">
+		<Authorized>
+			<DataGridCommandColumn TItem="ExerciseLog" Caption="Action" NewCommandAllowed=false>
+				<EditCommandTemplate>
+					<Button Color="Color.Primary" Clicked="() => EditExerciseLog(context)">Edit</Button>
+				</EditCommandTemplate>
+			</DataGridCommandColumn>
+		</Authorized>
+	</AuthorizeView>
 </DataGrid>
-
-

@@ -14,7 +14,7 @@ using SmartWorkout.Services.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddAuthenticationCore();
+builder.Services.AddAuthentication();
 builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
